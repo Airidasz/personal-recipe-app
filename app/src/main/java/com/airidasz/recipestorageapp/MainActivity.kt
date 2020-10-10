@@ -4,11 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -19,6 +17,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar_main))
+
+        val searchIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_search_24)!!
+        supportActionBar?.setIcon(searchIcon)
 
         btn_move_to_add_activity.setOnClickListener {
             //Snackbar.make(it, "Replace with your own action", Snackbar.LENGTH_LONG).show()
@@ -31,6 +32,21 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
             overridePendingTransition(0,0)
         }
+
+        toolbar_main.setNavigationOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(0,0)
+        }
+
+        recipe_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+
+                }
+            }
+        })
     }
 
     override fun onResume() {  // After a pause OR at startup
@@ -43,8 +59,17 @@ class MainActivity : AppCompatActivity() {
         val db = DataBaseHandler(this)
         val data = db.readData()
 
-        val listAdapter = MyAdapter(data, this)
+        if(data.size <=1)
+            app_bar_main.setExpanded(true)
+
+        if(data.size <= 0)
+            activity_main_empty_message.visibility = TextView.VISIBLE
+        else
+            activity_main_empty_message.visibility = TextView.INVISIBLE
+
+        val listAdapter = MainActivityRecyclerViewAdapter(data, this)
         recycler.adapter = listAdapter
+        
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -55,11 +80,14 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.menu_settings-> {
-                Toast.makeText(this,  "Not yet", Toast.LENGTH_SHORT).show();
+                val intent = Intent(this, SettingsActivity::class.java)
+                startActivity(intent)
             }
         }
         return true
     }
+
+
 
 
 }
