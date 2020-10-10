@@ -4,18 +4,21 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_view_item.*
+import androidx.core.content.ContextCompat
 
-class ItemViewActivity : AppCompatActivity() {
+class ViewItemActivity : AppCompatActivity() {
     private val db = DataBaseHandler(this)
     private var recipeId:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_item)
+        setSupportActionBar(findViewById(R.id.toolbar_view_item))
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         recipeId = intent.getIntExtra("recipe_id", 1)
 
@@ -23,6 +26,7 @@ class ItemViewActivity : AppCompatActivity() {
 
         val title: TextView = findViewById(R.id.view_item_title)
         title.text = data.name
+        supportActionBar?.title = data.name
 
         val description: TextView = findViewById(R.id.view_item_description)
         description.text = data.description

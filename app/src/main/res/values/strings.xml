@@ -8,6 +8,9 @@
     <string name="search">Paieška</string>
     <string name="cancel">Atšaukti</string>
     <string name="settings">Nustatymai</string>
+    <string name="choose">Pasirinkite</string>
+    <string name="new_recipe">Naujas receptas</string>
+    <string name="no_recipes_added">Jūs dar nepridėjote savo receptų. Tai galite padaryti paspaudę mygtuką apačioje</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">
         "Material is the metaphor.\n\n"

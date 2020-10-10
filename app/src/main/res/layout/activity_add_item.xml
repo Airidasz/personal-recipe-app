@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddItemActivity">
 
-    <EditText
-        android:id="@+id/add_item_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Pavadinimas"
-        android:inputType="textPersonName"
-        android:singleLine="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/add_item_description"
-        android:layout_width="365dp"
-        android:layout_height="136dp"
-        android:layout_marginTop="8dp"
-        android:ems="10"
-        android:hint="Aprašymas"
-        android:inputType="textPersonName"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:layout_constraintEnd_toEndOf="@+id/add_item_title"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/add_item_title"
-        app:layout_constraintTop_toBottomOf="@+id/add_item_title" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/add_item_empty"
+        android:orientation="vertical">
+    </LinearLayout>
 
     <Button
         android:id="@+id/btn_add_recipe"
@@ -44,38 +24,93 @@
         android:text="@string/add"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toEndOf="@+id/btn_exit_add" />
+        android:textSize="15sp"
+        app:layout_anchorGravity="bottom|end"
+        android:layout_gravity="bottom|end"
+        android:elevation="3dp"
+        app:layout_anchor="@id/add_item_empty"/>
 
     <Button
         android:id="@+id/btn_exit_add"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button_red"
         android:text="@string/cancel"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:textSize="15dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="15sp"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_anchorGravity="bottom|start"
+        android:layout_gravity="bottom|start"
+        android:elevation="3dp"
+        app:layout_anchor="@id/add_item_empty"/>
 
-    <ImageView
-        android:id="@+id/add_item_image"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_main"
         android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_marginBottom="36dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/add_item_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@android:drawable/ic_menu_report_image" />
+        android:layout_height="wrap_content"
+        >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            >
+
+            <ImageView
+                android:id="@+id/add_item_image"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@android:drawable/ic_menu_report_image"
+                app:layout_collapseMode="parallax"
+                android:fitsSystemWindows="true"/>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_item_scroll">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/add_item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:ems="10"
+                    android:hint="@string/title"
+                    android:inputType="textPersonName"
+                    android:singleLine="true" />
+
+                <EditText
+                    android:id="@+id/add_item_description"
+                    android:layout_width="365dp"
+                    android:layout_height="136dp"
+                    android:ems="10"
+                    android:hint="@string/description"
+                    android:layout_marginTop="20dp"
+                    android:inputType="textPersonName"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                </LinearLayout>
+            </ScrollView>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

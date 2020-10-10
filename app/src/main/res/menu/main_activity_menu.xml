@@ -7,4 +7,5 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:id="@+id/menu_settings"
         app:showAsAction="always"/>
+
 </menu>

@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MyAdapter// Counstructor for the Class
+class MainActivityRecyclerViewAdapter// Counstructor for the Class
     (contactsList: MutableList<Recipe>?, context: Context?) :
-    RecyclerView.Adapter<MyAdapter.RecipeHolder>() {
+    RecyclerView.Adapter<MainActivityRecyclerViewAdapter.RecipeHolder>() {
 
     private var recipeList: MutableList<Recipe>? = contactsList
 
@@ -34,7 +34,7 @@ class MyAdapter// Counstructor for the Class
         holder.setValues(recipe)
 
         holder.itemView.setOnClickListener {
-            val intent = Intent(it.context, ItemViewActivity::class.java)
+            val intent = Intent(it.context, ViewItemActivity::class.java)
             intent.putExtra("recipe_id", recipe?.id)
             it.context.startActivity(intent)
         }

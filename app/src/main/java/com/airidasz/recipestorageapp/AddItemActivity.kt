@@ -11,24 +11,28 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_add_item.*
 
 
 class AddItemActivity() : AppCompatActivity() {
-    private lateinit var imageBitmap: Bitmap
+    private var imageBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
+//        setSupportActionBar(findViewById(R.id.toolbar_add_item))
 
-        var db = DataBaseHandler(this)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val db = DataBaseHandler(this)
 
         add_item_image.setOnClickListener{
             val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             galleryIntent.type = "image/*";
 
-            val chooser = Intent.createChooser(galleryIntent, "Pasirinkite")
+            val chooser = Intent.createChooser(galleryIntent, getString(R.string.choose))
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
             startActivityForResult(chooser, 100)
 
