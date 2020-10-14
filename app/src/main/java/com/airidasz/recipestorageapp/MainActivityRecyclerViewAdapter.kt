@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class MainActivityRecyclerViewAdapter// Counstructor for the Class
+class MainActivityRecyclerViewAdapter// Constructor for the Class
     (contactsList: MutableList<Recipe>?, context: Context?) :
     RecyclerView.Adapter<MainActivityRecyclerViewAdapter.RecipeHolder>() {
 

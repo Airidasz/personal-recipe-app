@@ -2,9 +2,15 @@ package com.airidasz.recipestorageapp
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 
@@ -23,11 +29,18 @@ class SearchActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        val searchView = findViewById<SearchView>(R.id.action_search_two)
-//        searchView.isIconified = false
+
+        val recycler = findViewById<RecyclerView>(R.id.recipe_list_search)
+        val layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = layoutManager
+
+        val db = DataBaseHandler(this)
+        val data = db.readData()
+
+        val listAdapter = SearchActivityRecyclerViewAdapter(data, this)
+        recycler.adapter = listAdapter
 
         search_window_search.isIconified = false
-
 
         search_window_search.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -41,11 +54,13 @@ class SearchActivity : AppCompatActivity() {
                     supportActionBar?.setHomeAsUpIndicator(closeIcon)
                     searchBarNoText=false
                 }
+
+                //(recycler.adapter as SearchActivityRecyclerViewAdapter).filter.filter(newText)
+                listAdapter.filter.filter(newText)
                 return false
             }
 
             override fun onQueryTextSubmit(query: String): Boolean {
-                // task HERE
                 return false
             }
 
@@ -84,10 +99,6 @@ class SearchActivity : AppCompatActivity() {
 //        searchView?.isIconified = false
 //
 //
-//        searchView?.setOnCloseListener {
-//            finish()
-//            return@setOnCloseListener true
-//        }
 //       // Toast.makeText(this,  searchView.toString(), Toast.LENGTH_SHORT).show();
 //
 //        return true

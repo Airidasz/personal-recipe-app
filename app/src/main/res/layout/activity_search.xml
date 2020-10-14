@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +7,7 @@
     tools:context=".SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.NoActionBar"
@@ -27,12 +27,20 @@
             app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
 
             <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_window_search"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/search_window_search"
                 app:closeIcon="@null"
-                app:searchIcon="@null"/>
+                app:searchIcon="@null" />
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipe_list_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
