@@ -23,7 +23,7 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val view = layoutInflater.inflate(R.layout.recipe_item, parent, false)
+        val view = layoutInflater.inflate(R.layout.recipe_item_search, parent, false)
         return RecipeHolder(view)
     }
 
@@ -44,14 +44,12 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
     }
 
     inner class RecipeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val image : ImageView = itemView.findViewById(R.id.recipe_image)
-        private val titleText : TextView = itemView.findViewById(R.id.recipe_title)
-        private val descriptionText : TextView = itemView.findViewById(R.id.recipe_description)
+        private val titleText : TextView = itemView.findViewById(R.id.recipe_title_search)
+        private val descriptionText : TextView = itemView.findViewById(R.id.recipe_description_search)
 
         fun setValues(recipe : Recipe?){
             titleText.text = recipe?.name
             descriptionText.text = recipe?.description
-            image.setImageBitmap(recipe?.image)
         }
 
     }

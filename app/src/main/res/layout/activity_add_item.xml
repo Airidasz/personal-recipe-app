@@ -96,11 +96,11 @@
                 <EditText
                     android:id="@+id/add_item_description"
                     android:layout_width="365dp"
-                    android:layout_height="136dp"
+                    android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="@string/description"
                     android:layout_marginTop="20dp"
-                    android:inputType="textPersonName"
+                    android:inputType="textMultiLine"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
                 </LinearLayout>
             </ScrollView>
