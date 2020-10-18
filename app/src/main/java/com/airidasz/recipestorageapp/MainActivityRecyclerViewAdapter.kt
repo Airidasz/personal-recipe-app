@@ -2,19 +2,22 @@ package com.airidasz.recipestorageapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-
 class MainActivityRecyclerViewAdapter// Constructor for the Class
-    (contactsList: MutableList<Recipe>?, context: Context?) :
+    (contactsList: MutableList<Recipe>?, context :Context?) :
     RecyclerView.Adapter<MainActivityRecyclerViewAdapter.RecipeHolder>() {
 
     private var recipeList: MutableList<Recipe>? = contactsList
+    private val context:Context? = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -37,6 +40,30 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
             val intent = Intent(it.context, ViewItemActivity::class.java)
             intent.putExtra("recipe_id", recipe?.id)
             it.context.startActivity(intent)
+        }
+
+        if(position ==  0){
+            val firstElement = holder.itemView
+
+            val params = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT)
+
+            val r: Resources? = context?.resources
+            val horizontal = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                15F,
+                r?.displayMetrics
+            ).toInt()
+            val vertical = TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                20F,
+                r?.displayMetrics
+            ).toInt()
+
+            params.setMargins(horizontal, vertical, horizontal, vertical)
+
+            firstElement.layoutParams = params
         }
     }
 
