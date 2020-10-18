@@ -21,7 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
-            android:background="#000000">
+            android:background="#000000"
+            android:contentDescription="@string/recipe_image">
         </ImageView>
     </androidx.cardview.widget.CardView>
 
