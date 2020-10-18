@@ -27,10 +27,11 @@ class AddItemActivity() : AppCompatActivity() {
 
         val db = DataBaseHandler(this)
 
+        // Starts activity to get recipe image
         add_item_image.setOnClickListener{
             val galleryIntent = Intent(Intent.ACTION_GET_CONTENT)
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            galleryIntent.type = "image/*";
+            galleryIntent.type = "image/*"
 
             val chooser = Intent.createChooser(galleryIntent, getString(R.string.choose))
             chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
@@ -38,6 +39,7 @@ class AddItemActivity() : AppCompatActivity() {
 
         }
 
+        // Add recipe button, checks if fields are not empty, adds recipe if true
         btn_add_recipe.setOnClickListener {
             if(add_item_title.text.toString().isNotEmpty() &&
                 add_item_description.text.toString().isNotEmpty()
@@ -58,9 +60,10 @@ class AddItemActivity() : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
+        // When activity to get image finishes, image processing starts
         if (resultCode == Activity.RESULT_OK){
             val imageUri = data?.data
-            // camera and gallery storage send different data
+            // Image from gallery and camera are received differently
             // so they have to be decoded to bitmap differently
             // camera we get data from extras
             // gallery form data.data which is a Uri
