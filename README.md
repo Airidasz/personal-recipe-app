@@ -2,11 +2,11 @@
 Android application for storing your personal recipes
 
 <p float="left">
-    <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/list.png" /> 
-  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view.png"/>
+    <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/list.png"  width="320" /> 
+  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view.png" width="320"/>
   </p>
   
 <p float="left">
-  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png"/>
-  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" /> 
+  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
+  <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" /> 
   </p>
