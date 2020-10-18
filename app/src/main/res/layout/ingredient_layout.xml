@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:orientation="horizontal">
 
     <EditText
         android:id="@+id/add_item_ingredient_quantity"
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:background="@drawable/textfield_custom"
-        android:paddingStart="12dp"
         android:ems="10"
         android:hint="Q"
-        android:nextFocusDown="@+id/add_item_ingredient_measurement_units"
         android:inputType="numberDecimal|numberSigned"
+        android:nextFocusDown="@+id/add_item_ingredient_measurement_units"
+        android:paddingStart="12dp"
         android:singleLine="true" />
 
     <EditText
@@ -23,24 +25,36 @@
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/add_item_ingredient_quantity"
         android:background="@drawable/textfield_custom"
-        android:nextFocusDown="@+id/add_item_ingredient_name"
         android:ems="10"
         android:hint="UM"
         android:inputType="textShortMessage"
+        android:nextFocusDown="@+id/add_item_ingredient_name"
         android:paddingStart="12dp"
         android:singleLine="true" />
 
     <EditText
         android:id="@+id/add_item_ingredient_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_toStartOf="@+id/btn_remove_ingredient"
+        android:layout_toEndOf="@+id/add_item_ingredient_measurement_units"
         android:background="@drawable/textfield_custom"
-        android:nextFocusDown="@+id/add_item_ingredient_quantity"
         android:ems="10"
-        android:hint="Ingredientas"
+        android:hint="@string/ingredient"
         android:inputType="textShortMessage"
+        android:nextFocusDown="@+id/add_item_ingredient_quantity"
         android:paddingStart="12dp"
         android:singleLine="true" />
-</LinearLayout>
+
+    <Button
+        android:id="@+id/btn_remove_ingredient"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/remove_ingredient_button"
+        android:layout_centerVertical="true" />
+</RelativeLayout>

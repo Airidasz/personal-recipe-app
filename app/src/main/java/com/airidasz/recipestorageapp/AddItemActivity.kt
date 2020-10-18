@@ -8,10 +8,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_add_item.*
+import kotlinx.android.synthetic.main.ingredient_layout.view.*
 
 
 class AddItemActivity() : AppCompatActivity() {
@@ -60,6 +62,10 @@ class AddItemActivity() : AppCompatActivity() {
 
         btn_add_ingredient.setOnClickListener{
             val myView: View = inflater.inflate(R.layout.ingredient_layout, ingredient_list, false)
+
+            myView.btn_remove_ingredient.setOnClickListener {
+                ingredient_list.removeView(myView)
+            }
 
             ingredient_list.addView(myView)
         }
