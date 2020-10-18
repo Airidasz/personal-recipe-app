@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginBottom="10dp">
+
+    <EditText
+        android:id="@+id/add_item_ingredient_quantity"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:background="@drawable/textfield_custom"
+        android:paddingStart="12dp"
+        android:ems="10"
+        android:hint="Q"
+        android:nextFocusDown="@+id/add_item_ingredient_measurement_units"
+        android:inputType="numberDecimal|numberSigned"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/add_item_ingredient_measurement_units"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/textfield_custom"
+        android:nextFocusDown="@+id/add_item_ingredient_name"
+        android:ems="10"
+        android:hint="UM"
+        android:inputType="textShortMessage"
+        android:paddingStart="12dp"
+        android:singleLine="true" />
+
+    <EditText
+        android:id="@+id/add_item_ingredient_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/textfield_custom"
+        android:nextFocusDown="@+id/add_item_ingredient_quantity"
+        android:ems="10"
+        android:hint="Ingredientas"
+        android:inputType="textShortMessage"
+        android:paddingStart="12dp"
+        android:singleLine="true" />
+</LinearLayout>

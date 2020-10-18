@@ -1,17 +1,16 @@
 package com.airidasz.recipestorageapp
 
 import android.app.Activity
-import android.content.DialogInterface
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.Gravity
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_add_item.*
 
 
@@ -54,6 +53,15 @@ class AddItemActivity() : AppCompatActivity() {
 
         btn_exit_add.setOnClickListener {
             finish()
+        }
+
+        val inflater =
+            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+        btn_add_ingredient.setOnClickListener{
+            val myView: View = inflater.inflate(R.layout.ingredient_layout, ingredient_list, false)
+
+            ingredient_list.addView(myView)
         }
     }
 
