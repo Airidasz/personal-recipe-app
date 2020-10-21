@@ -1,5 +1,6 @@
 package com.airidasz.recipestorageapp
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.activity_view_item.*
 
 class ViewItemActivity : AppCompatActivity() {
     private val db = DataBaseHandler(this)
@@ -22,15 +24,18 @@ class ViewItemActivity : AppCompatActivity() {
 
         val data = db.getRecipe(recipeId)
 
-        val title: TextView = findViewById(R.id.view_item_title)
-        title.text = data.name
+        view_item_title.text = data.name
         supportActionBar?.title = data.name
 
-        val description: TextView = findViewById(R.id.view_item_description)
-        description.text = data.description
+        view_item_description.text = data.description
 
-        val image: ImageView = findViewById(R.id.view_item_image)
-        image.setImageBitmap(data.image)
+        view_item_image.setImageBitmap(data.image)
+
+        view_item_image.setOnClickListener{
+            val intent = Intent(this, ViewImageActivity::class.java)
+            intent.putExtra("recipe_id", recipeId)
+            startActivity(intent)
+        }
 
     }
 
