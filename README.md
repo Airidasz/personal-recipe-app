@@ -9,13 +9,13 @@ Android application for storing your personal recipes
 </p>
   
 <p float="left">
-    <b>Recipe list</b>
+    <h3>Recipe list</h3>
     <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/list.png"  width="320" /> 
-    <b>View recipe</b>
+    <h3>View recipe</h3>
     <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view.png" width="320"/>
 </p>
   
 <p float="left">
-    <b>View image screen</b>
+    <h3>View image screen</h3>
     <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view_image.png" width="320"/>
 </p>
