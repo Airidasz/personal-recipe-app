@@ -2,15 +2,11 @@ package com.airidasz.recipestorageapp
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
-import android.widget.SearchView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search.*
 
 
@@ -24,7 +20,7 @@ class SearchActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.toolbar_search))
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        backArrowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)!!
+        backArrowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24_black)!!
         closeIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24_black)!!
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

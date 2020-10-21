@@ -36,7 +36,6 @@ class ViewItemActivity : AppCompatActivity() {
             intent.putExtra("recipe_id", recipeId)
             startActivity(intent)
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

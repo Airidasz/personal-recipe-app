@@ -19,6 +19,12 @@ class ViewImageActivity() : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_image)
 
+        setSupportActionBar(findViewById(R.id.view_image_toolbar))
+
+        view_image_toolbar.setNavigationOnClickListener {
+            finish()
+        }
+
         val recipeId = intent.getIntExtra("recipe_id", 1)
 
         val db = DataBaseHandler(this)
