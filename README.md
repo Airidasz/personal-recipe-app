@@ -2,7 +2,7 @@
 Android application for storing your personal recipes
  
  <div style="display: inline-block;">
-  <h3 style="overflow: hidden;">Add recipe</h3>
+  <h3 style="display: inline-block;">Add recipe</h3>
   <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
  </div>
   <div style="display: inline-block;">
