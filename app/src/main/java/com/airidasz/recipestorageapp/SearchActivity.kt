@@ -25,10 +25,9 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
         backArrowIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_arrow_back_24)!!
-        closeIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24)!!
+        closeIcon = ContextCompat.getDrawable(this, R.drawable.ic_baseline_close_24_black)!!
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
 
         val recycler = findViewById<RecyclerView>(R.id.recipe_list_search)
         val layoutManager = LinearLayoutManager(this)

@@ -4,15 +4,19 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Rect
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.DisplayMetrics
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.appbar.AppBarLayout
 import kotlinx.android.synthetic.main.activity_add_item.*
+import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
 
 
@@ -40,7 +44,7 @@ class AddItemActivity() : AppCompatActivity() {
 
         }
 
-        // Add recipe button, checks if fields are not empty, adds recipe if true
+       //  Add recipe button, checks if fields are not empty, adds recipe if true
         btn_add_recipe.setOnClickListener {
             if(add_item_title.text.toString().isNotEmpty() &&
                 add_item_description.text.toString().isNotEmpty()
@@ -68,6 +72,18 @@ class AddItemActivity() : AppCompatActivity() {
             }
 
             ingredient_list.addView(myView)
+
+//            val params = AppBarLayout.LayoutParams(
+//                AppBarLayout.LayoutParams.MATCH_PARENT,
+//                AppBarLayout.LayoutParams.MATCH_PARENT
+//            )
+////            val a = add_recipe_fields.height
+////
+////            Toast.makeText(this, "$a", Toast.LENGTH_SHORT).show()
+//
+//
+//            add_item_scroll.layoutParams = params
+
         }
     }
 

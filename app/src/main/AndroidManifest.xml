@@ -31,7 +31,8 @@
         </activity>
         <activity android:name=".AddItemActivity"
             android:theme="@style/AppTheme"
-            android:label="@string/new_recipe">
+            android:label="@string/new_recipe"
+            android:windowSoftInputMode="adjustPan">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
