@@ -75,6 +75,15 @@ class AddItemActivity() : AppCompatActivity() {
         // Change cancel and add recipe button opacity based on the visibility of image
         app_bar_main.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
             val opacity = abs(verticalOffset) / appBarLayout.totalScrollRange.toFloat()
+            if (opacity == 0F) {
+                btn_add_recipe.visibility = View.GONE
+                btn_exit_add.visibility = View.GONE
+            }
+            else {
+                btn_add_recipe.visibility = View.VISIBLE
+                btn_exit_add.visibility = View.VISIBLE
+            }
+
             btn_add_recipe.alpha = opacity
             btn_exit_add.alpha = opacity
         })

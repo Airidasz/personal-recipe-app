@@ -18,8 +18,6 @@ class ViewItemActivity : AppCompatActivity() {
         setContentView(R.layout.activity_view_item)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         recipeId = intent.getIntExtra("recipe_id", 1)
 
         val data = db.getRecipe(recipeId)
