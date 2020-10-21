@@ -2,8 +2,10 @@
 Android application for storing your personal recipes
   
 <p float="left">
+  <div style="display:inline;">
     <b>Add recipe</b>
     <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
+  </div>
     <b>Search through recipes</b>
     <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" /> 
 </p>
