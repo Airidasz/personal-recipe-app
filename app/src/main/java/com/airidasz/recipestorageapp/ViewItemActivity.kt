@@ -16,7 +16,7 @@ class ViewItemActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_item)
-        setSupportActionBar(findViewById(R.id.toolbar_view_item))
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

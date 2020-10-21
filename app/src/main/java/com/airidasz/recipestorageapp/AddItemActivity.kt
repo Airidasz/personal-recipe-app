@@ -10,8 +10,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
+import kotlin.math.abs
+import kotlin.math.round
 
 
 class AddItemActivity() : AppCompatActivity() {
@@ -20,7 +23,6 @@ class AddItemActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_item)
-//        setSupportActionBar(findViewById(R.id.toolbar_add_item))
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -69,6 +71,13 @@ class AddItemActivity() : AppCompatActivity() {
 
             add_item_nested_scroll.post(Runnable { add_item_nested_scroll.fullScroll(View.FOCUS_DOWN) })
         }
+
+        // Change cancel and add recipe button opacity based on the visibility of image
+        app_bar_main.addOnOffsetChangedListener(OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            val opacity = abs(verticalOffset) / appBarLayout.totalScrollRange.toFloat()
+            btn_add_recipe.alpha = opacity
+            btn_exit_add.alpha = opacity
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
