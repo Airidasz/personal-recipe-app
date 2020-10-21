@@ -64,18 +64,19 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/add_item_nested_scroll"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/add_item_scroll"
-            android:scrollbars="vertical"
             android:elevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/add_recipe_fields"
+                    android:paddingBottom="80dp"
                     android:orientation="vertical"
                     android:layout_marginHorizontal="20dp"
                    >
@@ -126,7 +127,6 @@
                         android:layout_marginHorizontal="20dp"
                         android:background="@drawable/add_ingredient_button"
                         android:text="@string/add_ingredient"
-                        android:layout_marginBottom="80dp"
                         android:textAllCaps="false"
                         android:textColor="#FFFFFF"
                         android:textSize="12sp" />
