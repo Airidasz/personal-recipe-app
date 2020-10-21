@@ -1,14 +1,10 @@
 # Personal recipe storage app
 Android application for storing your personal recipes
   
-  <div style="display:inline;">
-    <b>Add recipe</b>
-    <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
-  </div>
-   <div style="display:inline;">
-    <b>Search through recipes</b>
-    <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" /> 
-  </div>
+<h3>Add recipe</h3>
+<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
+<h3>Search through recipes</h3>
+<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" /> 
   
 <p float="left">
     <b>Recipe list</b>
