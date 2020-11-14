@@ -1,15 +1,15 @@
 package com.airidasz.recipestorageapp
 
 class Ingredient {
-    var id : Int = 0
-    var recipeId:Int = 0
-    var ingredientName : String = ""
+    var id : Long = 0
+    var recipeId:Long = 0
+    var ingredient : String = ""
     var quantity : Float = 0.0f
     var measurement_units : String = ""
 
-    constructor(recipeId:Int, ingredientName:String, quantity:Float, measurement_units:String){
+    constructor(recipeId:Long, ingredient:String, quantity:Float, measurement_units:String){
         this.recipeId = recipeId
-        this.ingredientName = ingredientName
+        this.ingredient = ingredient
         this.quantity = quantity
         this.measurement_units=measurement_units
     }

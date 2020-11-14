@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
         recycler.layoutManager = layoutManager
 
         val db = DataBaseHandler(this)
-        val data = db.readData()
+        val data = db.readRecipeData()
 
         if(data.size <=1)
             app_bar_main.setExpanded(true)
@@ -74,20 +74,7 @@ class MainActivity : AppCompatActivity() {
         
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_activity_menu, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.menu_settings-> {
-                val intent = Intent(this, SettingsActivity::class.java)
-                startActivity(intent)
-            }
-        }
-        return true
-    }
 
 
 

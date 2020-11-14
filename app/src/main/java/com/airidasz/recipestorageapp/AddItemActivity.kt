@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -14,7 +15,6 @@ import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
 import kotlin.math.abs
-import kotlin.math.round
 
 
 class AddItemActivity() : AppCompatActivity() {
@@ -35,7 +35,11 @@ class AddItemActivity() : AppCompatActivity() {
             galleryIntent.type = "image/*"
 
             val chooser = Intent.createChooser(galleryIntent, getString(R.string.choose))
-            chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
+
+            // Check if the user has the ability to take pictures
+            if(cameraIntent.resolveActivity(packageManager) != null)
+                chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, arrayOf(cameraIntent))
+
             startActivityForResult(chooser, 100)
 
         }
@@ -45,8 +49,24 @@ class AddItemActivity() : AppCompatActivity() {
             if(add_item_title.text.toString().isNotEmpty() &&
                 add_item_description.text.toString().isNotEmpty()
             ){
-                val recipe = Recipe(add_item_title.text.toString(), add_item_description.text.toString(), imageBitmap)
-                db.insertData(recipe)
+                val recipe = Recipe()
+                recipe.name = add_item_title.text.toString()
+                recipe.description = add_item_description.text.toString()
+                recipe.portion = add_item_quantity.text.toString().toInt()
+                recipe.image = imageBitmap
+
+                val id = db.insertRecipe(recipe)
+
+                for (i in 0 until ingredient_list.childCount) {
+                    val view = ingredient_list.getChildAt(i)
+
+                    val ingredient = Ingredient()
+                    ingredient.recipeId = id
+                    ingredient.ingredient = view.add_item_ingredient_name.text.toString()
+                    ingredient.quantity = view.add_item_ingredient_quantity .text.toString().toFloat()
+                    ingredient.measurement_units = view.add_item_ingredient_measurement_units.text.toString()
+                    db.insertIngredient(ingredient)
+                }
 
                 finish()
             } else
@@ -69,6 +89,18 @@ class AddItemActivity() : AppCompatActivity() {
 
             ingredient_list.addView(myView)
 
+            myView.add_item_ingredient_name.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+
+                    val childCount = ingredient_list.childCount
+                    val childIndex = ingredient_list.indexOfChild(myView)
+                    Toast.makeText(this@AddItemActivity, "belekas", Toast.LENGTH_SHORT).show()
+
+                    return@OnKeyListener true
+                }
+                false
+            })
+
             add_item_nested_scroll.post(Runnable { add_item_nested_scroll.fullScroll(View.FOCUS_DOWN) })
         }
 
@@ -87,6 +119,21 @@ class AddItemActivity() : AppCompatActivity() {
             btn_add_recipe.alpha = opacity
             btn_exit_add.alpha = opacity
         })
+    }
+
+    private fun addIngredientField(): View{
+        val inflater =
+            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
+        val myView: View = inflater.inflate(R.layout.ingredient_layout, ingredient_list, false)
+
+        myView.btn_remove_ingredient.setOnClickListener {
+            ingredient_list.removeView(myView)
+        }
+
+        ingredient_list.addView(myView)
+
+        return myView
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,3 +161,4 @@ class AddItemActivity() : AppCompatActivity() {
         }
     }
 }
+
