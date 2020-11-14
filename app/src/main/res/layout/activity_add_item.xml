@@ -110,8 +110,6 @@
                         android:layout_height="40dp"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:gravity="center_vertical|right"
-                        android:paddingEnd="8dp"
                         android:layout_marginTop="20dp"
                         android:background="@drawable/textfield_custom"
                         android:paddingStart="12dp"
@@ -142,7 +140,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:id="@+id/ingredient_list"
+                        android:id="@+id/add_item_ingredient_list"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginTop="10dp">

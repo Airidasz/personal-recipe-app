@@ -25,7 +25,7 @@ class ViewImageActivity() : AppCompatActivity(){
             finish()
         }
 
-        val recipeId = intent.getIntExtra("recipe_id", 1)
+        val recipeId = intent.getLongExtra("recipe_id", 1)
 
         val db = DataBaseHandler(this)
         val data = db.getRecipe(recipeId)

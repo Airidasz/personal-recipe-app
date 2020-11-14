@@ -30,7 +30,7 @@ class SearchActivity : AppCompatActivity() {
         recycler.layoutManager = layoutManager
 
         val db = DataBaseHandler(this)
-        val data = db.readData()
+        val data = db.readRecipeData()
 
         val listAdapter = SearchActivityRecyclerViewAdapter(data, this)
         recycler.adapter = listAdapter

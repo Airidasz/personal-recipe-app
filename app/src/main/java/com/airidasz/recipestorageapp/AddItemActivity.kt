@@ -57,13 +57,13 @@ class AddItemActivity() : AppCompatActivity() {
 
                 val id = db.insertRecipe(recipe)
 
-                for (i in 0 until ingredient_list.childCount) {
-                    val view = ingredient_list.getChildAt(i)
+                for (i in 0 until add_item_ingredient_list.childCount) {
+                    val view = add_item_ingredient_list.getChildAt(i)
 
                     val ingredient = Ingredient()
                     ingredient.recipeId = id
                     ingredient.ingredient = view.add_item_ingredient_name.text.toString()
-                    ingredient.quantity = view.add_item_ingredient_quantity .text.toString().toFloat()
+                    ingredient.quantity = view.add_item_ingredient_quantity.text.toString().toFloat()
                     ingredient.measurement_units = view.add_item_ingredient_measurement_units.text.toString()
                     db.insertIngredient(ingredient)
                 }
@@ -81,25 +81,13 @@ class AddItemActivity() : AppCompatActivity() {
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         btn_add_ingredient.setOnClickListener{
-            val myView: View = inflater.inflate(R.layout.ingredient_layout, ingredient_list, false)
+            val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
 
             myView.btn_remove_ingredient.setOnClickListener {
-                ingredient_list.removeView(myView)
+                add_item_ingredient_list.removeView(myView)
             }
 
-            ingredient_list.addView(myView)
-
-            myView.add_item_ingredient_name.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
-
-                    val childCount = ingredient_list.childCount
-                    val childIndex = ingredient_list.indexOfChild(myView)
-                    Toast.makeText(this@AddItemActivity, "belekas", Toast.LENGTH_SHORT).show()
-
-                    return@OnKeyListener true
-                }
-                false
-            })
+            add_item_ingredient_list.addView(myView)
 
             add_item_nested_scroll.post(Runnable { add_item_nested_scroll.fullScroll(View.FOCUS_DOWN) })
         }
@@ -125,13 +113,13 @@ class AddItemActivity() : AppCompatActivity() {
         val inflater =
             getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
-        val myView: View = inflater.inflate(R.layout.ingredient_layout, ingredient_list, false)
+        val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
 
         myView.btn_remove_ingredient.setOnClickListener {
-            ingredient_list.removeView(myView)
+            add_item_ingredient_list.removeView(myView)
         }
 
-        ingredient_list.addView(myView)
+        add_item_ingredient_list.addView(myView)
 
         return myView
     }

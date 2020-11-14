@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
-import android.widget.Toast
 import androidx.core.database.getBlobOrNull
 import java.io.ByteArrayOutputStream
 
@@ -47,13 +46,12 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         cv.put(COL_NAME, recipe.name)
         cv.put(COL_PORTION, recipe.portion)
         cv.put(COL_DESCRIPTION, recipe.description)
-        val id = db.insert(TABLE_RECIPES, null, cv)
-        if (id == -1.toLong())
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        //        if (id == -1.toLong())
+//            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+//        else
+//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
 
-        return id
+        return db.insert(TABLE_RECIPES, null, cv)
     }
 
     fun insertIngredient(ingredient:Ingredient) {
@@ -65,11 +63,11 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         cv.put(COL_QUANTITY,ingredient.quantity)
         cv.put(COL_MEASUREMENT_UNITS,ingredient.measurement_units)
 
-        val id = db.insert(TABLE_INGREDIENTS, null, cv)
-        if (id == -1.toLong())
-            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
-        else
-            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
+        db.insert(TABLE_INGREDIENTS, null, cv)
+//        if (id == (-1).toLong())
+//            Toast.makeText(context, "Failed", Toast.LENGTH_SHORT).show()
+//        else
+//            Toast.makeText(context, "Success", Toast.LENGTH_SHORT).show()
 
     }
 
@@ -97,13 +95,38 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         return list
     }
 
-    fun getRecipe(i:Int) : Recipe{
+    fun getIngredientsByRecipeId(i : Long): ArrayList<Ingredient>{
+        val db = this.readableDatabase
+        val query = "Select * from $TABLE_INGREDIENTS Where recipe_id = $i"
+        val result = db.rawQuery(query, null)
+
+        val ingredients = ArrayList<Ingredient>()
+
+        if(result.moveToFirst()){
+            do{
+                val ingredient = Ingredient()
+                ingredient.ingredient = result.getString(result.getColumnIndex(COL_INGREDIENT))
+                ingredient.measurement_units = result.getString(result.getColumnIndex(
+                    COL_MEASUREMENT_UNITS))
+                ingredient.quantity = result.getString(result.getColumnIndex(COL_QUANTITY)).toFloat()
+
+            ingredients.add(ingredient)
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+
+        return ingredients
+    }
+
+    fun getRecipe(i:Long) : Recipe{
         val db = this.readableDatabase
         val query = "Select * from $TABLE_RECIPES Where id = $i"
         val result = db.rawQuery(query, null)
         result.moveToFirst()
 
-        var recipe = Recipe()
+        val recipe = Recipe()
 
         recipe.id = result.getString(result.getColumnIndex(COL_ID)).toLong()
         recipe.image = getByteArrayAsBitmap(result.getBlobOrNull(result.getColumnIndex(COL_IMG)))
@@ -116,7 +139,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         return recipe
     }
 
-    fun removeRecipe(i:Int) {
+    fun removeRecipe(i:Long) {
         val db = this.readableDatabase
         db.delete(TABLE_RECIPES, "id = $i", null)
 

@@ -46,8 +46,8 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
             val firstElement = holder.itemView
 
             val params = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT)
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT)
 
             val r: Resources? = context?.resources
             val horizontal = TypedValue.applyDimension(
