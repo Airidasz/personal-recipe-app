@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -15,7 +14,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.activity_add_item.app_bar_main
-import kotlinx.android.synthetic.main.activity_view_item.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
 import kotlin.math.abs
 
@@ -60,7 +58,7 @@ class AddItemActivity() : AppCompatActivity() {
                 recipe.portion = add_item_quantity.text.toString().toInt()
                 recipe.image = imageBitmap
 
-                val id = db.insertRecipe(recipe)
+                val id = db.addRecipe(recipe)
 
                 for (i in 0 until add_item_ingredient_list.childCount) {
                     val view = add_item_ingredient_list.getChildAt(i)
@@ -70,7 +68,7 @@ class AddItemActivity() : AppCompatActivity() {
                     ingredient.ingredient = view.add_item_ingredient_name.text.toString()
                     ingredient.quantity = view.add_item_ingredient_quantity.text.toString().toFloat() / recipe.portion
                     ingredient.measurement_units = view.add_item_ingredient_measurement_units.text.toString()
-                    db.insertIngredient(ingredient)
+                    db.addIngredient(ingredient)
                 }
 
                 finish()

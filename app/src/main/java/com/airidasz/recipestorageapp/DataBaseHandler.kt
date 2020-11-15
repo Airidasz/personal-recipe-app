@@ -39,7 +39,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         TODO("Not yet implemented")
     }
 
-    fun insertRecipe(recipe:Recipe):Long {
+    fun addRecipe(recipe:Recipe):Long {
         val db = this.writableDatabase
         val cv = ContentValues()
 
@@ -55,7 +55,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         return db.insert(TABLE_RECIPES, null, cv)
     }
 
-    fun insertIngredient(ingredient:Ingredient) {
+    fun addIngredient(ingredient:Ingredient) {
         val db = this.writableDatabase
         val cv = ContentValues()
 
@@ -72,7 +72,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
 
     }
 
-    fun readRecipeData() : MutableList<Recipe> {
+    fun readRecipes() : MutableList<Recipe> {
         val list : MutableList<Recipe> = ArrayList()
 
         val db = this.readableDatabase
@@ -86,19 +86,19 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
                 recipe.name = result.getString(result.getColumnIndex(COL_NAME))
                 recipe.description = result.getString(result.getColumnIndex(COL_DESCRIPTION))
                 recipe.portion = result.getInt(result.getColumnIndex(COL_PORTION))
+                recipe.ingredients = getIngredientsByRecipe(recipe.id)
                 list.add(recipe)
             }while (result.moveToNext())
         }
 
         result.close()
-        db.close()
 
         return list
     }
 
-    fun getIngredientsByRecipeId(i : Long): ArrayList<Ingredient>{
+    fun getIngredientsByRecipe(id : Long): ArrayList<Ingredient>{
         val db = this.readableDatabase
-        val query = "Select * from $TABLE_INGREDIENTS Where recipe_id = $i"
+        val query = "Select * from $TABLE_INGREDIENTS Where recipe_id = $id"
         val result = db.rawQuery(query, null)
 
         val ingredients = ArrayList<Ingredient>()
@@ -116,14 +116,14 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         }
 
         result.close()
-        db.close()
+
 
         return ingredients
     }
 
-    fun getRecipe(i:Long) : Recipe{
+    fun getRecipe(id:Long) : Recipe{
         val db = this.readableDatabase
-        val query = "Select * from $TABLE_RECIPES Where id = $i"
+        val query = "Select * from $TABLE_RECIPES Where id = $id"
         val result = db.rawQuery(query, null)
         result.moveToFirst()
 
@@ -135,16 +135,16 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         recipe.description = result.getString(result.getColumnIndex(COL_DESCRIPTION))
 
         result.close()
-        db.close()
+
 
         return recipe
     }
 
-    fun removeRecipe(i:Long) {
+    fun removeRecipe(id:Long) {
         val db = this.readableDatabase
-        db.delete(TABLE_RECIPES, "id = $i", null)
+        db.delete(TABLE_RECIPES, "id = $id", null)
 
-        db.close()
+
     }
 
     fun getBitmapAsByteArray(bitmap: Bitmap?): ByteArray? {

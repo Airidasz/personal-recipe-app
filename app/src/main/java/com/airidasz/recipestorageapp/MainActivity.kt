@@ -2,12 +2,9 @@ package com.airidasz.recipestorageapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -50,17 +47,17 @@ class MainActivity : AppCompatActivity() {
         recycler.layoutManager = layoutManager
 
         val db = DataBaseHandler(this)
-        val data = db.readRecipeData()
+        val recipes = db.readRecipes()
 
-        if(data.size <=1)
+        if(recipes.size <=1)
             app_bar_main.setExpanded(true)
 
-        if(data.size <= 0)
+        if(recipes.size <= 0)
             activity_main_empty_message.visibility = TextView.VISIBLE
         else
             activity_main_empty_message.visibility = TextView.INVISIBLE
 
-        val listAdapter = MainActivityRecyclerViewAdapter(data, this)
+        val listAdapter = MainActivityRecyclerViewAdapter(recipes, this)
         recycler.adapter = listAdapter
         
     }

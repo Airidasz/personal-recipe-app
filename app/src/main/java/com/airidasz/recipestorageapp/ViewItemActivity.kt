@@ -1,5 +1,6 @@
 package com.airidasz.recipestorageapp
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
@@ -11,15 +12,12 @@ import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.activity_view_item.*
 import kotlinx.android.synthetic.main.ingredient_item.view.*
-import kotlinx.android.synthetic.main.ingredient_layout.view.*
 
 
 class ViewItemActivity : AppCompatActivity() {
@@ -33,7 +31,7 @@ class ViewItemActivity : AppCompatActivity() {
         recipeId = intent.getLongExtra("recipe_id", 1)
 
         val recipe = db.getRecipe(recipeId)
-        val ingredients = db.getIngredientsByRecipeId(recipeId)
+        val ingredients = db.getIngredientsByRecipe(recipeId)
 
         view_item_title.text = recipe.name
         supportActionBar?.title = recipe.name
@@ -103,17 +101,15 @@ class ViewItemActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun changePortionSize(portion:Int, ingredients: ArrayList<Ingredient>) {
         for (i in 0 until view_item_ingredient_list.childCount) {
             val myView = view_item_ingredient_list.getChildAt(i)
 
-            myView.ingredient_quantity.text =
-                "• " + (ingredients[i].quantity * portion).toString()
+            myView.ingredient_quantity.text = "•  ${(ingredients[i].quantity * portion)}"
 
             if (ingredients[i].quantity % 1 == 0F) {
-                myView.ingredient_quantity.text =
-                    "• " + (ingredients[i].quantity * portion).toInt()
-                        .toString()
+                myView.ingredient_quantity.text = "•  ${(ingredients[i].quantity * portion).toInt()}"
             }
         }
     }

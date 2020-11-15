@@ -8,6 +8,7 @@ class Recipe {
     var description : String = ""
     var portion:Int = 1;
     var image:Bitmap? = null
+    var ingredients:ArrayList<Ingredient>? = null
 
     constructor(name:String, description:String, portion:Int,image:Bitmap?){
         this.name = name

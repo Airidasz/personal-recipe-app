@@ -34,8 +34,6 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
 
         holder.setValues(recipe)
 
-
-
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewItemActivity::class.java)
             intent.putExtra("recipe_id", recipe?.id)
@@ -71,14 +69,28 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
     inner class RecipeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val image : ImageView = itemView.findViewById(R.id.recipe_image)
         private val titleText : TextView = itemView.findViewById(R.id.recipe_title)
-        private val descriptionText : TextView= itemView.findViewById(R.id.recipe_description)
+        private val description : TextView = itemView.findViewById(R.id.recipe_description)
 
         fun setValues(recipe : Recipe?) {
             titleText.text = recipe?.name
-            descriptionText.text = recipe?.description
 
-            image.setImageBitmap(recipe?.image)
-            if (recipe?.image != null){ // If image exists, we set it's size
+            for (i in 0 until recipe?.ingredients?.count()!!) {
+                val quantity = recipe.ingredients?.get(i)?.quantity!!
+                val measurements = "${recipe.ingredients?.get(i)?.measurement_units!!} ${recipe.ingredients?.get(i)?.ingredient}"
+
+                if (quantity % 1 == 0F)
+                    description.append("• ${(quantity * recipe.portion).toInt()} $measurements\n")
+                else
+                    description.append("• ${(quantity * recipe.portion)} $measurements\n")
+            }
+
+            // If no ingredients exist, set text to recipe description
+            if (description.text == "")
+                description.text = recipe.description
+
+            // Set image, then some picture scaling magic
+            image.setImageBitmap(recipe.image)
+            if (recipe.image != null){
                 val height = 170F // 170dp or other dp value
 
                 val r: Resources? = context?.resources
