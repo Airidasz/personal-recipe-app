@@ -8,6 +8,7 @@ Android application for storing your personal recipes
 This project is an assignment for Kaunas University of Technology module "Smart Device programming" 
 
 ### Screenshots
+<p float="left">
 <div style='display: inline-block'>
 <h4><center>Add new recipe</center></h4>
 <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
@@ -16,6 +17,7 @@ This project is an assignment for Kaunas University of Technology module "Smart 
 <h4><center>Recipe search</center></h4>
 <img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" />
 </div>
+</p>
   
 <div style='display: inline-block'>
 <h4><center>Recipe list</center></h4>
