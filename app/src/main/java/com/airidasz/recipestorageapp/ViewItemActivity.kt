@@ -106,10 +106,11 @@ class ViewItemActivity : AppCompatActivity() {
         for (i in 0 until view_item_ingredient_list.childCount) {
             val myView = view_item_ingredient_list.getChildAt(i)
 
-            myView.ingredient_quantity.text = "•  ${(ingredients[i].quantity * portion)}"
+            val quantity = ingredients[i].quantity * portion
+            myView.ingredient_quantity.text = "•  $quantity"
 
-            if (ingredients[i].quantity % 1 == 0F) {
-                myView.ingredient_quantity.text = "•  ${(ingredients[i].quantity * portion).toInt()}"
+            if (quantity % 1 == 0F) {
+                myView.ingredient_quantity.text = "•  ${quantity.toInt()}"
             }
         }
     }

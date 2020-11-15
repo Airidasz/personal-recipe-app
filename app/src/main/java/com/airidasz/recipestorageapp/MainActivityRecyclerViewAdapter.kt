@@ -11,11 +11,10 @@ import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivityRecyclerViewAdapter// Constructor for the Class
-    (contactsList: MutableList<Recipe>?, context :Context?) :
+    (contactsList: MutableList<Recipe>?, private val context: Context?) :
     RecyclerView.Adapter<MainActivityRecyclerViewAdapter.RecipeHolder>() {
 
     private var recipeList: MutableList<Recipe>? = contactsList
-    private val context:Context? = context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -75,13 +74,13 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
             titleText.text = recipe?.name
 
             for (i in 0 until recipe?.ingredients?.count()!!) {
-                val quantity = recipe.ingredients?.get(i)?.quantity!!
+                val quantity = recipe.ingredients?.get(i)?.quantity!! * recipe.portion
                 val measurements = "${recipe.ingredients?.get(i)?.measurement_units!!} ${recipe.ingredients?.get(i)?.ingredient}"
 
                 if (quantity % 1 == 0F)
-                    description.append("• ${(quantity * recipe.portion).toInt()} $measurements\n")
+                    description.append("• ${quantity.toInt()} $measurements\n")
                 else
-                    description.append("• ${(quantity * recipe.portion)} $measurements\n")
+                    description.append("• ${quantity} $measurements\n")
             }
 
             // If no ingredients exist, set text to recipe description

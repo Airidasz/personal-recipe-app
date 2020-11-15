@@ -133,7 +133,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         recipe.image = getByteArrayAsBitmap(result.getBlobOrNull(result.getColumnIndex(COL_IMG)))
         recipe.name = result.getString(result.getColumnIndex(COL_NAME))
         recipe.description = result.getString(result.getColumnIndex(COL_DESCRIPTION))
-
+        recipe.portion = result.getInt(result.getColumnIndex(COL_PORTION))
         result.close()
 
 
