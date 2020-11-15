@@ -1,5 +1,7 @@
+<div align="center">
 # Personal recipe storage app
 Android application for storing your personal recipes
+</div>
  
  <div style="display: inline-block;">
   <h3 style="display: inline-block;">Add recipe</h3>
