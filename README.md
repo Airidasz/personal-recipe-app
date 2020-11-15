@@ -2,7 +2,12 @@
  <h3>Personal recipe storage app</h3><br>
 Android application for storing your personal recipes
 </div>
- 
+
+## Table of Contents
+
+* [About the Project](#about-the-project)
+  * [Screenshots](#screenshots)
+
 ## About The Project
 
 This project is an assignment for Kaunas University of Technology module "Smart Device programming" 
