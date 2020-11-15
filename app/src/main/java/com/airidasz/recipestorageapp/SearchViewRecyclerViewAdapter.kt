@@ -7,10 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchActivityRecyclerViewAdapter// Constructor for the Class
@@ -44,12 +42,25 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
     }
 
     inner class RecipeHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val titleText : TextView = itemView.findViewById(R.id.recipe_title_search)
-        private val descriptionText : TextView = itemView.findViewById(R.id.recipe_description_search)
+        private val titleText : TextView = itemView.findViewById(R.id.recipe_search_title)
+        private val description : TextView = itemView.findViewById(R.id.recipe_search_description)
 
-        fun setValues(recipe : Recipe?){
+        fun setValues(recipe : Recipe?) {
             titleText.text = recipe?.name
-            descriptionText.text = recipe?.description
+
+            for (i in 0 until recipe?.ingredients?.count()!!) {
+                val quantity = recipe.ingredients?.get(i)?.quantity!! * recipe.portion
+                val measurements = "${recipe.ingredients?.get(i)?.measurement_units!!} ${recipe.ingredients?.get(i)?.ingredient}"
+
+                if (quantity % 1 == 0F)
+                    description.append("• ${quantity.toInt()} $measurements\n")
+                else
+                    description.append("• ${quantity} $measurements\n")
+            }
+
+            // If no ingredients exist, set text to recipe description
+            if (description.text == "")
+                description.text = recipe.description
         }
 
     }
