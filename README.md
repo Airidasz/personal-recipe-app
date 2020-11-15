@@ -1,5 +1,5 @@
 <div align="center">
-# Personal recipe storage app
+ <h1>Personal recipe storage app</h1><br>
 Android application for storing your personal recipes
 </div>
  
