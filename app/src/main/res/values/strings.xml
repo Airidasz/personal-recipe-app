@@ -8,12 +8,14 @@
     <string name="search">Paieška</string>
     <string name="cancel">Atšaukti</string>
     <string name="add_ingredient">Pridėti ingredientą</string>
-    <string name="quantity">Porcijos</string>
+    <string name="quantity">Kiekis</string>
+    <string name="portions">Porcijos</string>
     <string name="settings">Nustatymai</string>
     <string name="choose">Pasirinkite</string>
     <string name="new_recipe">Naujas receptas</string>
     <string name="recipe_image">Receptio paveiksliukas</string>
     <string name="ingredient">Ingredientas</string>
+    <string name="ingredients">Ingredientai</string>
     <string name="no_recipes_added">Jūs dar nepridėjote savo receptų. Tai galite padaryti paspaudę mygtuką apačioje</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="large_text">

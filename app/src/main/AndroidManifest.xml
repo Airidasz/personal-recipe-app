@@ -31,7 +31,8 @@
                 android:value=".MainActivity" />
         </activity>
         <activity android:name=".ViewItemActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />

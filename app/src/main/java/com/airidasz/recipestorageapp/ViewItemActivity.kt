@@ -3,20 +3,20 @@ package com.airidasz.recipestorageapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.activity_view_item.*
 import kotlinx.android.synthetic.main.ingredient_item.view.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
+
 
 class ViewItemActivity : AppCompatActivity() {
     private val db = DataBaseHandler(this)
@@ -35,6 +35,7 @@ class ViewItemActivity : AppCompatActivity() {
         supportActionBar?.title = recipe.name
 
         view_item_description.text = recipe.description
+        view_item_quantity.setText(recipe.portion.toString(), TextView.BufferType.EDITABLE)
 
         view_item_image.setImageBitmap(recipe.image)
 
@@ -52,11 +53,47 @@ class ViewItemActivity : AppCompatActivity() {
 
             myView.ingredient_name.text = value.ingredient
             myView.ingredient_measurement_units.text = value.measurement_units
-            myView.ingredient_quantity.text = value.quantity.toString()
 
             view_item_ingredient_list.addView(myView)
         }
 
+        changePortionSize(recipe.portion, ingredients)
+
+        view_item_quantity.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable) {}
+            override fun beforeTextChanged(
+                s: CharSequence, start: Int,
+                count: Int, after: Int
+            ) {
+            }
+
+            override fun onTextChanged(
+                s: CharSequence, start: Int,
+                before: Int, count: Int
+            ) {
+                if (count > 0){
+                    changePortionSize(Integer.parseInt(s.toString()), ingredients)
+                } else {
+                    changePortionSize(recipe.portion, ingredients)
+                }
+            }
+        })
+
+    }
+
+    private fun changePortionSize(portion:Int, ingredients: ArrayList<Ingredient>) {
+        for (i in 0 until view_item_ingredient_list.childCount) {
+            val myView = view_item_ingredient_list.getChildAt(i)
+
+            myView.ingredient_quantity.text =
+                "• " + (ingredients[i].quantity * portion).toString()
+
+            if (ingredients[i].quantity % 1 == 0F) {
+                myView.ingredient_quantity.text =
+                    "• " + (ingredients[i].quantity * portion).toInt()
+                        .toString()
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

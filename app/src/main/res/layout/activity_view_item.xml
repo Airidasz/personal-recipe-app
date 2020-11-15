@@ -5,7 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewItemActivity">
+    tools:context=".ViewItemActivity"
+    android:focusable="false"
+    android:focusableInTouchMode="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar_main"
@@ -46,36 +48,78 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/add_recipe_fields"
+                android:layout_marginHorizontal="18dp"
                 android:orientation="vertical"
                 >
 
-                <TextView
-                    android:id="@+id/view_item_title"
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/title"
-                    android:textSize="25sp" />
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/portions"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="@string/title"/>
+                </RelativeLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:id="@+id/view_item_ingredient_list"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_marginTop="10dp">
-                </LinearLayout>
+                    android:orientation="horizontal">
+                <EditText
+                    android:id="@+id/view_item_quantity"
+                    android:layout_width="50dp"
+                    android:nextFocusDown="@+id/add_item_description"
+                    android:layout_height="40dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/textfield_custom"
+                    android:ems="10"
+                    android:hint="@string/quantity"
+                    android:gravity="center"
+                    android:inputType="numberSigned"
+                    android:singleLine="true" />
+                <TextView
+                    android:id="@+id/view_item_title"
+                    android:layout_width="290dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="top"
+                    android:text="@string/title"
+                    android:textSize="30sp"
+                    android:textColor="#000000"/>
+                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/description"/>
+
                 <TextView
                     android:id="@+id/view_item_description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginStart="12dp"
-                    android:text="@string/description"/>
-
+                    android:textColor="#000000"
+                    android:text="@string/description" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/ingredients"/>
+                <LinearLayout
+                    android:id="@+id/view_item_ingredient_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="5dp"
+                    android:orientation="vertical"/>
             </LinearLayout>
         </ScrollView>
     </androidx.core.widget.NestedScrollView>

@@ -42,7 +42,7 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
             it.context.startActivity(intent)
         }
 
-        if(position ==  0){
+        if(position ==  0){ // add a top and bottom margin for first card
             val firstElement = holder.itemView
 
             val params = LinearLayout.LayoutParams(
@@ -50,6 +50,7 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
                 LinearLayout.LayoutParams.MATCH_PARENT)
 
             val r: Resources? = context?.resources
+            // Fancy dp to px conversion, since you can only set pixel programmatically
             val horizontal = TypedValue.applyDimension(
                 TypedValue.COMPLEX_UNIT_DIP,
                 15F,

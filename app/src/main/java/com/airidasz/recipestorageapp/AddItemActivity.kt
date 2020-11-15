@@ -63,7 +63,7 @@ class AddItemActivity() : AppCompatActivity() {
                     val ingredient = Ingredient()
                     ingredient.recipeId = id
                     ingredient.ingredient = view.add_item_ingredient_name.text.toString()
-                    ingredient.quantity = view.add_item_ingredient_quantity.text.toString().toFloat()
+                    ingredient.quantity = view.add_item_ingredient_quantity.text.toString().toFloat() / recipe.portion
                     ingredient.measurement_units = view.add_item_ingredient_measurement_units.text.toString()
                     db.insertIngredient(ingredient)
                 }

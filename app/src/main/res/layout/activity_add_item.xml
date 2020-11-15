@@ -114,7 +114,7 @@
                         android:background="@drawable/textfield_custom"
                         android:paddingStart="12dp"
                         android:ems="10"
-                        android:hint="@string/quantity"
+                        android:hint="@string/portions"
                         android:inputType="numberSigned"
                         android:singleLine="true" />
                     </RelativeLayout>
