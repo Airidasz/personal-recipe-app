@@ -8,26 +8,34 @@ Android application for storing your personal recipes
 This project is an assignment for Kaunas University of Technology module "Smart Device programming" 
 
 ### Screenshots
-<p float="left">
-<h4><center>Add new recipe</center></h4>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/>
 
-<h4><center>Recipe search</center></h4>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" />
-</p>
-  
-<div style='display: inline-block'>
-<h4><center>Recipe list</center></h4>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/list.png"  width="320" /> 
-</div>
+<table>
+  <tr>
+  <th><center>Add new recipe</center></th>
+  <th><center>Recipe search</center></th>
+  </tr>
+  <tr>
+  <td><img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/add.png" width="320"/></td>
+  <td><img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/search.png" width="320" /></td>
+  </tr>
+</table>
 
-<div style='display: inline-block'>
-<h4><center>View recipe</center></h4>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view.png" width="320"/>
-</div>
-  
+<table>
+  <tr>
+  <th><center>Recipe list</center></th>
+  <th><center>View recipe</center></th>
+  </tr>
+  <tr>
+  <td><img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/list.png"  width="320" /> </td>
+  <td><img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view.png" width="320"/></td>
+  </tr>
+</table>
 
-<div style='display: inline-block'>
-<h4><center>View image screen</center></h4>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view_image.png" width="320"/>
-</div>
+<table>
+  <tr>
+  <th><center>View image screen</center></th>
+  </tr>
+  <tr>
+  <td><img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/view_image.png" width="320"/></td>
+  </tr>
+</table>
