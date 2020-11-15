@@ -25,9 +25,9 @@
             <ImageView
                 android:id="@+id/view_item_image"
                 android:layout_width="match_parent"
-                android:layout_height="230dp"
+                android:layout_height="wrap_content"
+                android:maxHeight="270dp"
                 android:scaleType="centerCrop"
-                app:srcCompat="@android:drawable/ic_menu_report_image"
                 app:layout_collapseMode="parallax"
                 android:fitsSystemWindows="true"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -80,9 +80,8 @@
                     android:layout_height="40dp"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
-                    android:background="@drawable/textfield_custom"
+                    android:background="@drawable/textfield_stroke_custom"
                     android:ems="10"
-                    android:hint="@string/quantity"
                     android:gravity="center"
                     android:inputType="numberSigned"
                     android:singleLine="true" />

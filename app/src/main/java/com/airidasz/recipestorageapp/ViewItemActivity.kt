@@ -2,16 +2,20 @@ package com.airidasz.recipestorageapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_add_item.*
 import kotlinx.android.synthetic.main.activity_view_item.*
 import kotlinx.android.synthetic.main.ingredient_item.view.*
@@ -38,6 +42,24 @@ class ViewItemActivity : AppCompatActivity() {
         view_item_quantity.setText(recipe.portion.toString(), TextView.BufferType.EDITABLE)
 
         view_item_image.setImageBitmap(recipe.image)
+
+//        if (recipe.image != null){ // If image exists, we set it's size
+//            val height = 270F // 170dp or other dp value
+//
+//            val r: Resources? = this.resources
+//            // Convert dp to px
+//            val imageHeight = TypedValue.applyDimension(
+//                TypedValue.COMPLEX_UNIT_DIP,
+//                height,
+//                r?.displayMetrics
+//            ).toInt()
+//
+//            val params = CollapsingToolbarLayout.LayoutParams(
+//                CollapsingToolbarLayout.LayoutParams.MATCH_PARENT,
+//                imageHeight)
+//
+//            view_item_image.layoutParams = params
+//        }
 
         view_item_image.setOnClickListener{
             val intent = Intent(this, ViewImageActivity::class.java)
