@@ -7,9 +7,7 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 
 class MainActivityRecyclerViewAdapter// Constructor for the Class
@@ -36,6 +34,8 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
 
         holder.setValues(recipe)
 
+
+
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewItemActivity::class.java)
             intent.putExtra("recipe_id", recipe?.id)
@@ -47,7 +47,7 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
 
             val params = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT)
+                LinearLayout.LayoutParams.WRAP_CONTENT)
 
             val r: Resources? = context?.resources
             // Fancy dp to px conversion, since you can only set pixel programmatically
@@ -73,10 +73,28 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
         private val titleText : TextView = itemView.findViewById(R.id.recipe_title)
         private val descriptionText : TextView= itemView.findViewById(R.id.recipe_description)
 
-        fun setValues(recipe : Recipe?){
+        fun setValues(recipe : Recipe?) {
             titleText.text = recipe?.name
             descriptionText.text = recipe?.description
+
             image.setImageBitmap(recipe?.image)
+            if (recipe?.image != null){ // If image exists, we set it's size
+                val height = 170F // 170dp or other dp value
+
+                val r: Resources? = context?.resources
+                // Convert dp to px
+                val imageHeight = TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP,
+                    height,
+                    r?.displayMetrics
+                ).toInt()
+
+                val params = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    imageHeight)
+
+                image.layoutParams = params
+            }
         }
 
     }

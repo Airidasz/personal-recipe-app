@@ -9,10 +9,13 @@ import android.provider.MediaStore
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_add_item.*
+import kotlinx.android.synthetic.main.activity_add_item.app_bar_main
+import kotlinx.android.synthetic.main.activity_view_item.*
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
 import kotlin.math.abs
 
@@ -25,6 +28,8 @@ class AddItemActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_add_item)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        add_item_quantity.setText(1.toString(), TextView.BufferType.EDITABLE)
 
         val db = DataBaseHandler(this)
 

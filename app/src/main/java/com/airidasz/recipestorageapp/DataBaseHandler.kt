@@ -42,6 +42,7 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
     fun insertRecipe(recipe:Recipe):Long {
         val db = this.writableDatabase
         val cv = ContentValues()
+
         cv.put(COL_IMG, getBitmapAsByteArray(recipe.image))
         cv.put(COL_NAME, recipe.name)
         cv.put(COL_PORTION, recipe.portion)
