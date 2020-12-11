@@ -120,13 +120,25 @@ class ViewItemActivity : AppCompatActivity() {
         return true
     }
 
+    override fun finish() {
+        super.finish()
+
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.view_item_delete->{
                 db.removeRecipe(recipeId)
                 finish()
             }
-            R.id.view_item_modify-> Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
+            R.id.view_item_modify-> {
+                val intent = Intent(this, EditItemActivity::class.java)
+                intent.putExtra("recipe_id", recipeId)
+                startActivity(intent)
+            }
             android.R.id.home->finish()
         }
         return true

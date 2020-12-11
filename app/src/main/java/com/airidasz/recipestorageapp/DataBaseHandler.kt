@@ -39,6 +39,23 @@ class DataBaseHandler (var context: Context) : SQLiteOpenHelper(context, DATABAS
         TODO("Not yet implemented")
     }
 
+    fun editRecipe(recipe:Recipe):Int {
+        val db = this.writableDatabase
+        val cv = ContentValues()
+
+        cv.put(COL_IMG, getBitmapAsByteArray(recipe.image))
+        cv.put(COL_NAME, recipe.name)
+        cv.put(COL_PORTION, recipe.portion)
+        cv.put(COL_DESCRIPTION, recipe.description)
+
+        return db.update(TABLE_RECIPES, cv, "$COL_ID = ?", arrayOf(recipe.id.toString()))
+    }
+
+    fun deleteRecipeIngredients(recipe:Recipe):Int {
+        val db = this.writableDatabase
+        return db.delete(TABLE_INGREDIENTS, "$COL_RECIPE_ID = ?", arrayOf(recipe.id.toString()))
+    }
+
     fun addRecipe(recipe:Recipe):Long {
         val db = this.writableDatabase
         val cv = ContentValues()

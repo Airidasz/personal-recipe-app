@@ -13,12 +13,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import kotlinx.android.synthetic.main.activity_add_item.*
-import kotlinx.android.synthetic.main.activity_add_item.app_bar_main
 import kotlinx.android.synthetic.main.ingredient_layout.view.*
 import kotlin.math.abs
 
 
-class AddItemActivity() : AppCompatActivity() {
+class EditItemActivity() : AppCompatActivity() {
     private var imageBitmap: Bitmap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,9 +26,39 @@ class AddItemActivity() : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        add_item_quantity.setText(1.toString(), TextView.BufferType.EDITABLE)
+        // Ingredients layout inflater
+        val inflater =
+            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         val db = DataBaseHandler(this)
+        val recipeId = intent.getLongExtra("recipe_id",0)
+
+        val recipe = db.getRecipe(recipeId)
+        val ingredients = db.getIngredientsByRecipe(recipeId)
+
+        ingredients.forEach {
+            val a = it
+
+            val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
+
+            myView.btn_remove_ingredient.setOnClickListener {
+                add_item_ingredient_list.removeView(myView)
+            }
+
+            add_item_ingredient_list.addView(myView)
+
+            add_item_nested_scroll.post(Runnable { add_item_nested_scroll.fullScroll(View.FOCUS_DOWN) })
+
+            myView.add_item_ingredient_quantity.setText(it.quantity.toString())
+            myView.add_item_ingredient_measurement_units.setText(it.measurement_units)
+            myView.add_item_ingredient_name.setText(it.ingredient)
+        }
+
+        imageBitmap = recipe.image
+        add_item_image.setImageBitmap(imageBitmap)
+        add_item_title.setText(recipe.name)
+        add_item_description.setText(recipe.description)
+        add_item_quantity.setText(recipe.portion.toString(), TextView.BufferType.EDITABLE)
 
         // Starts activity to get recipe image
         add_item_image.setOnClickListener{
@@ -47,31 +76,34 @@ class AddItemActivity() : AppCompatActivity() {
 
         }
 
-       //  Add recipe button, checks if fields are not empty, adds recipe if true
+        btn_add_recipe.text = getString(R.string.modify)
         btn_add_recipe.setOnClickListener {
             if(add_item_title.text.toString().isNotEmpty() &&
                 add_item_description.text.toString().isNotEmpty()
             ){
-                val recipe = Recipe()
                 recipe.name = add_item_title.text.toString()
                 recipe.description = add_item_description.text.toString()
                 recipe.portion = add_item_quantity.text.toString().toInt()
                 recipe.image = imageBitmap
 
-                val id = db.addRecipe(recipe)
+                db.editRecipe(recipe)
+                db.deleteRecipeIngredients(recipe)
 
                 for (i in 0 until add_item_ingredient_list.childCount) {
                     val view = add_item_ingredient_list.getChildAt(i)
 
                     val ingredient = Ingredient()
-                    ingredient.recipeId = id
+                    ingredient.recipeId = recipe.id
                     ingredient.ingredient = view.add_item_ingredient_name.text.toString()
                     ingredient.quantity = view.add_item_ingredient_quantity.text.toString().toFloat() / recipe.portion
                     ingredient.measurement_units = view.add_item_ingredient_measurement_units.text.toString()
                     db.addIngredient(ingredient)
                 }
 
-                finish()
+                val intent = Intent(this, ViewItemActivity::class.java)
+                intent.putExtra("recipe_id", recipe.id)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             } else
                 Toast.makeText(this, "Fill in fields", Toast.LENGTH_SHORT).show()
         }
@@ -79,9 +111,6 @@ class AddItemActivity() : AppCompatActivity() {
         btn_exit_add.setOnClickListener {
             finish()
         }
-
-        val inflater =
-            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
         btn_add_ingredient.setOnClickListener{
             val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
@@ -111,21 +140,6 @@ class AddItemActivity() : AppCompatActivity() {
             btn_exit_add.alpha = opacity
         })
     }
-
-//    private fun addIngredientField(): View{
-//        val inflater =
-//            getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-//
-//        val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
-//
-//        myView.btn_remove_ingredient.setOnClickListener {
-//            add_item_ingredient_list.removeView(myView)
-//        }
-//
-//        add_item_ingredient_list.addView(myView)
-//
-//        return myView
-//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

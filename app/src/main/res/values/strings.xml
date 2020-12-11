@@ -13,6 +13,7 @@
     <string name="settings">Nustatymai</string>
     <string name="choose">Pasirinkite</string>
     <string name="new_recipe">Naujas receptas</string>
+    <string name="edit_recipe">Recepto redagavimas</string>
     <string name="recipe_image">Receptio paveiksliukas</string>
     <string name="ingredient">Ingredientas</string>
     <string name="ingredients">Ingredientai</string>
