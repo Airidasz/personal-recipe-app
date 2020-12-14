@@ -1,6 +1,6 @@
 <div align="center">
  <h1>Culilib</h1>
-<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/icon.png" alt="Culilib Icon">
+<img src="https://raw.githubusercontent.com/Airidasz/personal-recipe-app/master/appImages/icon.png" alt="Culilib Icon"><br>
 Android application for storing your personal recipes
 </div>
 
