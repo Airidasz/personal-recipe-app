@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipe storage app</string>
+    <string name="app_name">Culilib</string>
     <string name="modify">Modifikuoti</string>
     <string name="delete">Ištrinti</string>
     <string name="title">Pavadinimas</string>

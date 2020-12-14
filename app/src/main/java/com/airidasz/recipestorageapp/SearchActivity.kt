@@ -50,7 +50,6 @@ class SearchActivity : AppCompatActivity() {
                     searchBarNoText=false
                 }
 
-                //(recycler.adapter as SearchActivityRecyclerViewAdapter).filter.filter(newText)
                 listAdapter.filter.filter(newText)
                 return false
             }
@@ -61,9 +60,6 @@ class SearchActivity : AppCompatActivity() {
 
         })
 
-//        val searchCloseImage = search_window_search.findViewById<ImageView>(R.id.search_close_btn)
-//        searchCloseImage.isEnabled = false;
-//        searchCloseImage.setImageDrawable(null)
     }
 
     override fun onPause() {
@@ -86,16 +82,4 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.search_menu, menu)
-//
-//        val searchView = menu?.findItem(R.id.action_search_two)?.actionView as SearchView?
-//
-//        searchView?.isIconified = false
-//
-//
-//       // Toast.makeText(this,  searchView.toString(), Toast.LENGTH_SHORT).show();
-//
-//        return true
-//    }
 }

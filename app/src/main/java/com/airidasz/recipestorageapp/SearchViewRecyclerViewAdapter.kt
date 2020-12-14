@@ -2,21 +2,22 @@ package com.airidasz.recipestorageapp
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import java.util.*
 import kotlin.collections.ArrayList
 
 class SearchActivityRecyclerViewAdapter// Constructor for the Class
-    (contactsList: MutableList<Recipe>?, context: Context?) :
+    (sentRecipesList: MutableList<Recipe>?, context: Context?) :
     RecyclerView.Adapter<SearchActivityRecyclerViewAdapter.RecipeHolder>(), Filterable {
 
     private var recipeList: MutableList<Recipe>? = ArrayList()
-    private var allRecipes : MutableList<Recipe> = contactsList!!
+    private var allRecipes : MutableList<Recipe> = sentRecipesList!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -55,7 +56,7 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
                 if (quantity % 1 == 0F)
                     description.append("• ${quantity.toInt()} $measurements\n")
                 else
-                    description.append("• ${quantity} $measurements\n")
+                    description.append("• $quantity $measurements\n")
             }
 
             // If no ingredients exist, set text to recipe description

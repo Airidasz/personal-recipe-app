@@ -37,8 +37,6 @@ class EditItemActivity() : AppCompatActivity() {
         val ingredients = db.getIngredientsByRecipe(recipeId)
 
         ingredients.forEach {
-            val a = it
-
             val myView: View = inflater.inflate(R.layout.ingredient_layout, add_item_ingredient_list, false)
 
             myView.btn_remove_ingredient.setOnClickListener {
