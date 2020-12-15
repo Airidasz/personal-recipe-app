@@ -2,15 +2,13 @@ package com.airidasz.recipestorageapp
 
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Filter
+import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import java.util.*
-import kotlin.collections.ArrayList
 
 class SearchActivityRecyclerViewAdapter// Constructor for the Class
     (sentRecipesList: MutableList<Recipe>?, context: Context?) :
@@ -34,6 +32,7 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
         val recipe = recipeList?.get(position)
 
         holder.setValues(recipe)
+        holder.setIsRecyclable(false)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewItemActivity::class.java)
@@ -71,13 +70,19 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
             //Automatic on background thread
             override fun performFiltering(charSequence: CharSequence?): FilterResults? {
                 val filteredList: MutableList<Recipe> = ArrayList()
+                filteredList.clear()
 
-                if (charSequence.isNullOrBlank()) {
-                    filteredList.clear()
-                } else {
+                if (!charSequence.isNullOrBlank()) {
                     for (recipe in allRecipes) {
                         if (recipe.name.toLowerCase().contains(charSequence.toString().toLowerCase())) {
                             filteredList.add(recipe)
+                        } else {
+                            for (i in 0 until recipe?.ingredients?.count()!!){
+                                if (recipe.ingredients!![i].ingredient.toLowerCase().contains(charSequence.toString().toLowerCase())) {
+                                    filteredList.add(recipe)
+                                    break
+                                }
+                            }
                         }
                     }
                 }
@@ -89,6 +94,7 @@ class SearchActivityRecyclerViewAdapter// Constructor for the Class
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
                 recipeList?.clear()
+                notifyDataSetChanged()
                 recipeList?.addAll(0, results?.values as Collection<Recipe>)
                 notifyDataSetChanged()
             }

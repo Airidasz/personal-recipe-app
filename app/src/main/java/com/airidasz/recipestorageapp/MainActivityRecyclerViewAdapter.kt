@@ -32,6 +32,7 @@ class MainActivityRecyclerViewAdapter// Constructor for the Class
         val recipe = recipeList?.get(position)
 
         holder.setValues(recipe)
+        holder.setIsRecyclable(false)
 
         holder.itemView.setOnClickListener {
             val intent = Intent(it.context, ViewItemActivity::class.java)
